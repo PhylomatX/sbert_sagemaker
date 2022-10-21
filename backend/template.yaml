@@ -23,7 +23,7 @@ Resources:
   PostGetSimilarTextFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .
+      CodeUri: s3://sbert-lambda/lambda.zip
       Handler: app.lambda_handler
       Runtime: python3.7
       Environment:
