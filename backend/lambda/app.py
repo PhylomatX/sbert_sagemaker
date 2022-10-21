@@ -1,11 +1,6 @@
 import json
 from os import environ
-
 import boto3
-from urllib.parse import urlparse
-
-from elasticsearch import Elasticsearch, RequestsHttpConnection
-from requests_aws4auth import AWS4Auth
 
 # Global variables that are reused
 sm_runtime_client = boto3.client('sagemaker-runtime')
@@ -40,6 +35,6 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Methods": "*"
         },
         "body": json.dumps({
-            "features": features,
+            "test": 1,
         }),
     }
