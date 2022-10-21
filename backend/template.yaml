@@ -8,10 +8,6 @@ Description: 'backend
 Parameters:
   BucketName:
     Type: String
-  DomainName:
-    Type: String
-  ElasticSearchURL:
-    Type: String
   SagemakerEndpoint:
     Type: String
 Globals:
@@ -27,13 +23,11 @@ Resources:
   PostGetSimilarTextFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://aws-ml-blog/artifacts/nlu-search/lambda.zip
+      CodeUri: .
       Handler: app.lambda_handler
       Runtime: python3.7
       Environment:
         Variables:
-          ES_ENDPOINT:
-            Ref: ElasticSearchURL
           SM_ENDPOINT:
             Ref: SagemakerEndpoint
       Policies:
@@ -45,14 +39,6 @@ Resources:
           - sagemaker:InvokeEndpoint
           Resource:
           - Fn::Sub: arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint/${SagemakerEndpoint}
-      - Version: '2012-10-17'
-        Statement:
-        - Sid: AllowESS
-          Effect: Allow
-          Action:
-          - es:*
-          Resource:
-          - Fn::Sub: arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${DomainName}/*
       - S3ReadPolicy:
           BucketName:
             Ref: BucketName
@@ -62,11 +48,6 @@ Resources:
           Properties:
             Path: /postText
             Method: post
-        PostMatch:
-          Type: Api
-          Properties:
-            Method: post
-            Path: /postMatch
 Outputs:
   TextSimilarityApi:
     Description: API Gateway endpoint URL for Prod stage for GetSimilarText function
