@@ -31,7 +31,6 @@ Resources:
                   - "s3:PutObjectAcl"
                 Resource:
                   - !Sub arn:aws:s3:::${s3BucketBackend}/*
-                  - !Sub arn:aws:s3:::${s3BucketLambda}/*
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonSageMakerFullAccess
         - arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess
@@ -48,19 +47,12 @@ Resources:
   s3BucketBackend:
     Type: AWS::S3::Bucket
 
-  s3BucketLambda:
-    Type: AWS::S3::Bucket
-
 
 Outputs:
 
   s3BucketBackend:
     Description: S3 bucket name for backend
     Value: !Ref s3BucketBackend
-
-  s3BucketLambda:
-    Description: S3 bucket name for lambda
-    Value: !Ref s3BucketLambda
 
   SageMakerNotebookURL:
     Description: SageMaker Notebook Instance
