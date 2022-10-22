@@ -31,6 +31,7 @@ Resources:
                   - "s3:PutObjectAcl"
                 Resource:
                   - !Sub arn:aws:s3:::${s3BucketBackend}/*
+                  - !Sub arn:aws:s3:::${s3BucketLambda}/*
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonSageMakerFullAccess
         - arn:aws:iam::aws:policy/AWSCloudFormationReadOnlyAccess

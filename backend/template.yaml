@@ -23,7 +23,7 @@ Resources:
   PostGetSimilarTextFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://sbert-s3bucketlambda-1wosf5zm0y8ka/lambda.zip
+      CodeUri: s3://${BucketLambda}/lambda.zip
       Handler: app.lambda_handler
       Runtime: python3.7
       Environment:
@@ -41,7 +41,10 @@ Resources:
           - Fn::Sub: arn:aws:sagemaker:${AWS::Region}:${AWS::AccountId}:endpoint/${SagemakerEndpoint}
       - S3ReadPolicy:
           BucketName:
-            Ref: BucketName
+            Ref: BucketBackend
+      - S3ReadPolicy:
+          BucketName:
+            Ref: BucketLambda
       Events:
         PostText:
           Type: Api
