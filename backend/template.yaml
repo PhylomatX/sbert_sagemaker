@@ -6,7 +6,7 @@ Description: 'backend
 
   '
 Parameters:
-  BucketName:
+  BucketBackend:
     Type: String
   SagemakerEndpoint:
     Type: String
