@@ -20,13 +20,14 @@ def get_features(sm_runtime_client, sagemaker_endpoint, payload):
 
 def lambda_handler(event, context):
 
-    # sagemaker variables
-    sagemaker_endpoint = environ['SM_ENDPOINT']
+    # # sagemaker variables
+    # sagemaker_endpoint = environ['SM_ENDPOINT']
 
-    api_payload = json.loads(event['body'])
-    payload = api_payload['searchString']
+    # api_payload = json.loads(event['body'])
+    # payload = api_payload['searchString']
 
-    features = get_features(sm_runtime_client, sagemaker_endpoint, payload)
+    # features = get_features(sm_runtime_client, sagemaker_endpoint, payload)
+    
     return {
         "statusCode": 200,
         "headers": {
